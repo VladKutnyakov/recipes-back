@@ -5,6 +5,10 @@ import { CreateAiMessageDto } from './ai.dto'
 @Injectable()
 export class AiService {
   sendMessage(dto: CreateAiMessageDto) {
+    const messageDto = {
+      ...dto,
+      cuisine: dto.cuisine || 'Любая',
+    }
     const systemPrompt = `
       Ты - книга рецептов всех кухонь мира. Проанализируй входные данные и на их основе распиши мне один из РЕАЛЬНЫХ рецептов. Входные данные представлены в формате JSON со следующими полями:
       ingredients - список ингредиентов, используемых в рецепте\n
@@ -19,7 +23,7 @@ export class AiService {
     `
     const message = `
       ### ВХОДНЫЕ ДАННЫЕ\n
-      ${JSON.stringify(dto)}
+      ${JSON.stringify(messageDto)}
     `
     return client.chat({
       messages: [

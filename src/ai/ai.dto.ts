@@ -1,12 +1,7 @@
 export class CreateAiMessageDto {
   ingredients: string[]
-  cuisine: string
-  comment: string
-}
-
-export class IngredientDto {
-  name: string
-  amount: string
+  cuisine?: string
+  comment?: string
 }
 
 export class ResponseCreateAiMessageDto {
@@ -14,4 +9,9 @@ export class ResponseCreateAiMessageDto {
   ingredients: IngredientDto[]
   portions: string
   steps: string[]
+}
+
+export class IngredientDto {
+  name: string
+  amount: string
 }
