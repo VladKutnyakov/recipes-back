@@ -9,8 +9,9 @@ export class AiController {
   @Post('recipe')
   async requestRecipe(@Body() dto: CreateAiMessageDto): Promise<ResponseCreateAiMessageDto | undefined> {
     const res = await this.aiService.sendMessage(dto)
-    const responseDto = res.choices[0].message.content
-      ? JSON.parse(res.choices[0].message.content) as ResponseCreateAiMessageDto
+    const message = res.choices[0].message.content?.replaceAll(/```.*$/gm, '')
+    const responseDto = message
+      ? JSON.parse(message) as ResponseCreateAiMessageDto
       : undefined
     return responseDto
   }

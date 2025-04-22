@@ -34,6 +34,7 @@ export default tseslint.config(
       '@typescript-eslint/no-unsafe-argument': 'warn',
       'semi': ['error', 'never'],
       '@stylistic/indent': ['error', 2],
+      '@stylistic/quotes': ['error', 'single'],
     },
   },
 );

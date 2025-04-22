@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { client } from 'src/utils/gigachat'
+import { chat } from 'src/utils/deepseek'
 import { CreateAiMessageDto } from './ai.dto'
 
 @Injectable()
@@ -20,13 +20,14 @@ export class AiService {
       ingredients - массив, содержащий объекты, описывающие требуемые ингредиенты. Все ингредиенты, используемые в рецепте, должны быть представлены в этом массиве. Каждый объект ингредиента содержит два поля: name - название ингредиента, amount - требуемое количество;\n
       portions - количество порций, которое получится после приготовления блюда по твоему рецепту;\n
       steps - массив, содержащий этапы приготовления блюда;\n
-      Ответ должен быть КОРРЕКТНЫМ JSON объектом БЕЗ ЛИШНИХ СИМВОЛОВ.
+      Ответ должен быть КОРРЕКТНЫМ JSON объектом БЕЗ ЛИШНИХ СИМВОЛОВ. Ответ НЕ ДОЛЖЕН содержать markdown разметку.
     `
     const message = `
       ### ВХОДНЫЕ ДАННЫЕ\n
       ${JSON.stringify(messageDto)}
     `
-    return client.chat({
+
+    return chat({
       messages: [
         {
           role: 'system',
@@ -37,6 +38,7 @@ export class AiService {
           content: message,
         },
       ],
+      temperature: 1.2,
     })
   }
 }
