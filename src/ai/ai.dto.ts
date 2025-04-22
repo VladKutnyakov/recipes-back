@@ -1,5 +1,7 @@
 export class CreateAiMessageDto {
   ingredients: string[]
+  prUseAllIngredients: boolean
+  additionalIngredientsCount?: number
   cuisine?: string
   comment?: string
 }
