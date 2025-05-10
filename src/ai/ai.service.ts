@@ -42,6 +42,9 @@ export class AiService {
         },
       ],
       temperature: 2,
+      response_format: {
+        type: 'json_object',
+      },
     })
   }
 }
